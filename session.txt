@@ -1,0 +1,55 @@
+<?php
+	include 'includes/conn.php';
+	session_start();
+
+	if(isset($_SESSION['idx'])){
+		$conn = $pdo->open();
+
+		try{
+			$stmt = $conn->prepare("SELECT * FROM users WHERE type=:type ");
+			$stmt->execute(['type'=>$_SESSION['idx']]);
+			$user = $stmt->fetch();
+			
+			header('location: admin/home.php');
+		}
+		catch(PDOException $e){
+			echo "There is some problem in connection: " . $e->getMessage();
+		}
+		
+	}
+	
+	
+	
+
+	else if(isset($_SESSION['idx'])){
+		$conn = $pdo->open();
+
+		try{
+			$stmt = $conn->prepare("SELECT * FROM users WHERE type=:type");
+			$stmt->execute(['type'=>$_SESSION['idx']]);
+			$user = $stmt->fetch();
+		}
+		catch(PDOException $e){
+			echo "There is some problem in connection: " . $e->getMessage();
+		}
+
+		$pdo->close();
+	}
+
+	else if(isset($_SESSION['idx'])){
+		$conn = $pdo->open();
+
+		try{
+			$stmt = $conn->prepare("SELECT * FROM users WHERE type=:type");
+			$stmt->execute(['type'=>$_SESSION['idx']]);
+			$user = $stmt->fetch();
+
+			header('location: admin/admin_home.php');
+		}
+		catch(PDOException $e){
+			echo "There is some problem in connection: " . $e->getMessage();
+		}
+
+		$pdo->close();
+	}
+?>
